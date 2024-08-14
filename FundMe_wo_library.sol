@@ -18,7 +18,7 @@ contract FundMe {
         //require msg.value forces a user to send a value in the transaction or else it will revert the entire function call
         //so you should have all your requires at the beginning
         
-        require(getCoverstionRate(msg.value) >= minimumUsd, "Didn't send enough wei");
+        require(getConversionRate(msg.value) >= minimumUsd, "Didn't send enough wei");
         funders.push(msg.sender);
         addressToAmountFunded[msg.sender] = addressToAmountFunded[msg.sender] + msg.value;
     }
@@ -38,7 +38,7 @@ contract FundMe {
 
     }
 
-    function getCoverstionRate(uint256 ethAmount) public view returns(uint256) {
+    function getConversionRate(uint256 ethAmount) public view returns(uint256) {
         //Need to divide by 1e18 as ethPrice and ethAmount are both 1e18 so you need to cancel out
 
         uint256 ethPrice = getPrice();
